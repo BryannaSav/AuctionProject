@@ -1,0 +1,36 @@
+@model List<AuctionProject.Models.Auction>
+
+<h1>CURRENT AUCTIONS</h1>
+<h4>Hi @ViewBag.CurUser.FirstName!</h4>
+<table border="1">
+    <tr>
+        <th>Product</th>
+        <th>Seller</th>
+        <th>Top Bid</th>
+        <th>Time Remaining</th>
+        <th>Action</th>
+    </tr>
+    @{foreach(var listing in @Model)
+        {
+            <tr>
+                <td> <a href="/ShowAuction/@listing.AuctionId">@listing.Name</a> </td>
+                <td>@listing.Creator.FirstName</td>
+                <td>@string.Format("{0:C}", listing.HighestBid)</td>
+                <td>
+                    @{
+                        @Convert.ToInt32(((listing.EndDate-DateTime.Now).TotalDays))
+                        <span>Days</span>
+                    }
+                </td>
+                <td>@if(@listing.CreatorId==@ViewBag.CurUser.UserId)
+                    {
+                        <a href="/Delete/@listing.AuctionId">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<h4>Your Current Wallet: @string.Format("{0:C}", ViewBag.CurUser.Wallet)</h4>
+<button> <a href="/NewAuction">New Auction</a> </button>

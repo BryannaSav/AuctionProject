@@ -1,0 +1,40 @@
+﻿@model AuctionProject.Models.UserViewModel
+
+<h1>Register</h1>
+<form action="/Register" method="Post">
+    <label asp-for="FirstName"></label>
+    <input asp-for="FirstName">
+    <span class="error" asp-validation-for="FirstName"></span><br>
+
+    <label asp-for="LastName"></label>
+    <input asp-for="LastName">
+    <span class="error" asp-validation-for="LastName"></span><br>
+    
+    <label asp-for="Username"></label>
+    <input asp-for="Username">
+    <span class="error" asp-validation-for="Username"></span><br>
+
+    <label asp-for="Password"></label>
+    <input asp-for="Password">
+    <span class="error" asp-validation-for="Password"></span><br>
+
+    <label asp-for="ConfirmPassword"></label>
+    <input asp-for="ConfirmPassword">
+    <span class="error" asp-validation-for="ConfirmPassword"></span><br>
+
+    <input type="submit" value="Register">
+</form>
+
+<br>
+<h4 class="error">@ViewBag.error</h4>
+
+<h1>Login</h1>
+<form action="Login" method="post">
+    <label>Username: </label>
+    <input type="text" name="LogUsername"><br>
+
+    <label>Password: </label>
+    <input type="password" name="LogPass"><br>
+
+    <input type="submit" value="Login">
+</form>

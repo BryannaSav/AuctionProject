@@ -1,0 +1,23 @@
+@model AuctionProject.Models.Auction
+
+<h1 class="sameline" >@Model.Name &nbsp</h1>
+<h3 class="sameline"> Created By: @Model.Creator.FirstName</h3>
+<h4>Time Remaining: @Convert.ToInt32(((@Model.EndDate-DateTime.Now).TotalDays)) days</h4><br>
+
+<p>@Model.Description</p><br>
+<h4 class="sameline">Current Highest Bid: &nbsp</h4>
+<p class="sameline">  
+    @{
+        @if(Model.CreatorId == Model.BidderId)
+        {
+            <span>No bids placed. The starting bid is @string.Format("{0:C}", Model.StartingBid) </span>
+        }else{
+            <span>@string.Format("{0:C}", Model.HighestBid) By: @Model.Bidder.Username</span>
+        }
+    }
+</p>
+<form action="/AddBid/@Model.AuctionId" method="post">
+    <input type="text" name="NewBid" placeholder="Your bid goes here...">
+    <input type="submit" value="Bid!!">
+</form><br>
+<p class="error">@ViewBag.Message</p>
